@@ -1,13 +1,12 @@
 package com.example.Transport.schedule.repository;
 
-import com.example.Transport.schedule.models.User;
-import org.springframework.data.repository.CrudRepository;
-import org.springframework.stereotype.Repository;
+import com.example.Transport.schedule.models.ApplicationUser;
+import org.springframework.data.jpa.repository.JpaRepository;
 
-@Repository
-public interface UserRepository extends CrudRepository<User, Long> {
+import java.util.Optional;
+import java.util.UUID;
 
-    User findByUsername(String username);
-
+public interface UserRepository extends JpaRepository<ApplicationUser, UUID> {
+    Optional<ApplicationUser> findByEmail(String email);
 }
 
