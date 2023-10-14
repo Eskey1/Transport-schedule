@@ -68,5 +68,4 @@ public class ApplicationUser {
     @Column(name ="role")
     private ApplicationUserRole role;
 
-
 }
