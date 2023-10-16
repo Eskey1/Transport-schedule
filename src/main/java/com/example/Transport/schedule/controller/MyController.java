@@ -7,6 +7,12 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 public class MyController {
+
+    @GetMapping("/")
+    public  String index(){
+        return "redirect:/Main";
+    }
+
     @GetMapping("/Main")
     public String Main(@RequestParam(name = "name", required = false, defaultValue = "World") String name, Model model) {
         model.addAttribute("name", name);
