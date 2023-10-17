@@ -23,6 +23,4 @@ public class Shedule {
     private String DepartureTime;
 
     private UUID RouteId;
-
-
 }

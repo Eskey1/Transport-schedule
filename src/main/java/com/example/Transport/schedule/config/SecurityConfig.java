@@ -32,9 +32,10 @@ public class SecurityConfig {
                 .csrf((csrf) -> csrf
                         .csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse()))
                 .authorizeHttpRequests((authz) -> authz
-                        .requestMatchers("/Main", "/","/register").permitAll()
+                        .requestMatchers("/Main", "/").permitAll()
                         .anyRequest().authenticated()
                 )
+
                 .formLogin(form -> form
                         .loginPage("/auth/login").permitAll()
                         .defaultSuccessUrl("/auth/success", true))

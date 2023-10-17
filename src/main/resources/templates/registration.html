@@ -1,11 +1,11 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="https://www.thymeleaf.org">
 <head>
   <title>User Registration</title>
 </head>
 <body>
 <h2>User Registration</h2>
-<form action="#" th:action="@{/register}" th:object="${user}" method="POST">
+<form action="#" th:action="@{/registration}" th:object="${user}" method="POST">
   <div>
     <label for="name">Username:</label>
     <input type="text" id="name" th:field="*{username}" required autofocus/>
