@@ -12,9 +12,5 @@ public class TransportScheduleApplication {
     public static void main(String[] args) {
         SpringApplication.run(TransportScheduleApplication.class, args);
     }
-//    @GetMapping("/")
-//    public String hello(@RequestParam(value = "name", defaultValue = "World") String name) {
-//        return String.format("Hello %s!", name);
-//    }
 }
 

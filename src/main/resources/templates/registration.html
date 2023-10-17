@@ -1,24 +1,15 @@
 <!DOCTYPE html>
-<html xmlns:th="https://www.thymeleaf.org">
+<html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-  <title>User Registration</title>
+  <title>Spring Security Example </title>
 </head>
 <body>
-<h2>User Registration</h2>
-<form action="#" th:action="@{/registration}" th:object="${user}" method="POST">
-  <div>
-    <label for="name">Username:</label>
-    <input type="text" id="name" th:field="*{username}" required autofocus/>
-    <p th:if="${#fields.hasErrors('username')}" th:errors="*{username}"></p>
-  </div>
-  <div>
-    <label for="password">Password:</label>
-    <input type="password" id="password" th:field="*{password}" required/>
-    <p th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></p>
-  </div>
-  <div>
-    <button type="submit">Register</button>
-  </div>
+<form action="/registration" method="post">
+  <div><label> User Name : <input type="text" name="username"/> </label></div>
+  <div><label> Email : <input type="text" name="email"/> </label></div>
+  <div><label> Password: <input type="password" name="password"/> </label></div>
+  <input type="hidden" name="_csrf" value="{{_csrf.token}}" />
+  <div><input type="submit" value="Sign In"/></div>
 </form>
 </body>
 </html>
