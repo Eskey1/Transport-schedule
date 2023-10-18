@@ -2,23 +2,32 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <body>
 <div class="container">
-  <div class="title">Please Log In</div>
-  <div class="content">
-    <form action="@{/auth/login}" method="post">
-        <div class="input-box">
-          <span class="details">Email</span>
-          <input type="text" placeholder="Enter your email" required>
-        </div>
-        <div class="input-box">
-          <span class="details">Password</span>
-          <input type="text" placeholder="Enter your password" required>
-        </div>
-      <div class="button">
-        <input type="submit" value="Log in">
-        <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
-      </div>
-    </form>
-  </div>
+    <div class="title">Registration</div>
+    <div class="content">
+        <form action="/registration" method="post">
+            <div class="user-details">
+                <div class="input-box">
+                    <span class="details">Username</span>
+                    <input type="text" placeholder="Enter your username" required>
+                </div>
+                <div class="input-box">
+                    <span class="details">Email</span>
+                    <input type="text" placeholder="Enter your email" required>
+                </div>
+                <div class="input-box">
+                    <span class="details">Password</span>
+                    <input type="text" placeholder="Enter your password" required>
+                </div>
+                <div class="input-box">
+                    <span class="details">Confirm Password</span>
+                    <input type="text" placeholder="Confirm your password" required>
+                </div>
+            </div>
+            <div class="button">
+                <input type="submit" value="Registration">
+            </div>
+        </form>
+    </div>
 </div>
 </body>
 </html>
@@ -77,7 +86,7 @@ form .input-box span.details{
   margin-bottom: 5px;
 }
 .user-details .input-box input{
-  height: 50px;
+  height: 45px;
   width: 100%;
   outline: none;
   font-size: 16px;
@@ -91,11 +100,20 @@ form .input-box span.details{
 .user-details .input-box input:valid{
   border-color: #FF0000;
 }
+ form .gender-details .gender-title{
+  font-size: 20px;
+  font-weight: 500;
+ }
  form .category{
    display: flex;
    width: 80%;
    margin: 14px 0 ;
    justify-content: space-between;
+ }
+ form .category label{
+   display: flex;
+   align-items: center;
+   cursor: pointer;
  }
  form .category label .dot{
   height: 18px;
@@ -106,6 +124,12 @@ form .input-box span.details{
   border: 5px solid transparent;
   transition: all 0.3s ease;
 }
+ #dot-1:checked ~ .category label .one,
+ #dot-2:checked ~ .category label .two,
+ #dot-3:checked ~ .category label .three{
+   background: #FF0000;
+   border-color: #FF0000;
+ }
  form input[type="radio"]{
    display: none;
  }
@@ -134,5 +158,24 @@ form .input-box span.details{
  .container{
   max-width: 100%;
 }
+form .user-details .input-box{
+    margin-bottom: 15px;
+    width: 100%;
+  }
+  form .category{
+    width: 100%;
+  }
+  .content form .user-details{
+    max-height: 300px;
+    overflow-y: scroll;
+  }
+  .user-details::-webkit-scrollbar{
+    width: 5px;
+  }
+  }
+  @media(max-width: 459px){
+  .container .content .category{
+    flex-direction: column;
+  }
 }
 </style>

@@ -24,7 +24,7 @@ public class RegistrationController {
     public String registration() {
         return "registration";
     }
-    @PostMapping("/register")
+    @PostMapping("/registration")
     public ApplicationUser registerUser(@RequestBody ApplicationUser user) {
         return userDetailsService.registerUser(user);
     }
