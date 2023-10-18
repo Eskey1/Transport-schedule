@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org">
 <body>
 <div class="container">
   <div class="title">Please Log In</div>
   <div class="content">
-    <form action="@{/auth/login}" method="post">
+      <form th:action="@{/auth/login}" method="post">
         <div class="input-box">
           <span class="details">Email</span>
           <input type="text" placeholder="Enter your email" required>
