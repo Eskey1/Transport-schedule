@@ -56,14 +56,10 @@ public class ApplicationUser {
     @Id
     @GeneratedValue
     private UUID id;
-
     private String name;
-
+    @Column(unique = true)
     private String email;
-
-
     private String password;
-
     @Enumerated(value = EnumType.STRING)
     @Column(name ="role")
     private ApplicationUserRole role;

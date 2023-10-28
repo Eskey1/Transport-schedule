@@ -22,9 +22,10 @@ public class UserDetailsServiceImpl implements UserDetailsService {
                 repository.findByName(name).orElseThrow(() -> new UsernameNotFoundException("User not found!"))
         );
     }
-    public ApplicationUser registerUser(ApplicationUser user) {
-        return repository.save(user);
-    }
+
+//    public ApplicationUser registerUser(ApplicationUser user) {
+//        return repository.save(user);
+//    }
 
 }
 
