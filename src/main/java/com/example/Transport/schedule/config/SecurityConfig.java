@@ -42,6 +42,7 @@ public class SecurityConfig {
                         .defaultSuccessUrl("/Main", true))
                 .logout(form -> form
                         .logoutRequestMatcher(new AntPathRequestMatcher("/logout", "POST")).permitAll()
+                        .logoutSuccessUrl("/Main")
                         .invalidateHttpSession(true)
                         .clearAuthentication(true)
                         .deleteCookies("JSESSIONID", "XSRF-TOKEN"));
