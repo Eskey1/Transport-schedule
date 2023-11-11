@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -78,8 +78,12 @@
         <p>Ваш надежный партнер по поиску расписания автобусов, электричек и аэроэкспрессов!</p>
         <button onclick="location.href='/registration'">Регистрация</button>
         <button onclick="location.href='/auth/login'">Авторизация</button>
+        <button onclick="location.href='/auth/logout'">Выход из аккаунта</button>
+<!--        <form th:action="@{/logout}" method="POST">-->
+<!--            <input type="submit" value="Log out"/>-->
+<!--            <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>-->
+<!--        </form>-->
     </header>
-
     <nav>
         <ul>
             <li><a href="#автобусы">Автобусы</a></li>
@@ -90,6 +94,25 @@
 
     <section id="автобусы">
         <h2>Расписание автобусов</h2>
+        <form th:action="@{/getSchedule}" method="post">
+            <select name="stationCode">
+                <option th:each="station : ${stations}" th:value="${station.code}" th:text="${station.name}"></option>
+            </select>
+            <input type="submit" value="Получить расписание">
+        </form>
+
+        <table th:if="${schedule != null}" border="1">
+            <tr>
+                <th>Дата отправления</th>
+                <th>Направление</th>
+                <th>Время ближайшего отправления</th>
+            </tr>
+            <tr th:each="entry : ${schedule}">
+                <td th:text="${#dates.format(entry.departureDate, 'yyyy-MM-dd HH:mm')}"></td>
+                <td th:text="${entry.direction}"></td>
+                <td th:text="${entry.nextDepartureTime}"></td>
+            </tr>
+        </table>
         <!-- Здесь размещается информация о расписании автобусов -->
     </section>
 

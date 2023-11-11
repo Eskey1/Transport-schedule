@@ -7,6 +7,7 @@ import com.example.Transport.schedule.repository.UserRepository;
 import com.example.Transport.schedule.service.UserDetailsServiceImpl;
 import com.example.Transport.schedule.service.UserRegistrationService;
 import jakarta.validation.Valid;
+import org.jetbrains.annotations.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -37,13 +38,13 @@ public class RegistrationController {
     private UserRegistrationService userRegistrationService;
 
     @GetMapping("/registration")
-    public String register(final Model model){
+    public String register(final @NotNull Model model){
         model.addAttribute("userData", new UserData());
         return "/registration";
     }
 
     @PostMapping("/registration")
-    public String userRegistration(final @Valid UserData userData, final BindingResult bindingResult, final Model model){
+    public String userRegistration(final @Valid UserData userData, final @NotNull BindingResult bindingResult, final Model model){
         if(bindingResult.hasErrors()){
             model.addAttribute("registrationForm", userData);
             return "/registration";

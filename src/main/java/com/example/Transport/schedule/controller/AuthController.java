@@ -12,9 +12,13 @@ public class AuthController {
         return "login";
     }
 
-    @GetMapping("/success")
+//    @GetMapping("/success")
+//    public String getSuccessloginPage() {
+//        return "success";
+//    }
+    @GetMapping("/logout")
     public String getSuccessloginPage() {
-        return "success";
+        return "logout";
     }
 
 }

@@ -38,7 +38,8 @@ public class SecurityConfig {
 
                 .formLogin(form -> form
                         .loginPage("/auth/login").permitAll()
-                        .defaultSuccessUrl("/auth/success", true))
+//                        .defaultSuccessUrl("/auth/success", true))
+                        .defaultSuccessUrl("/Main", true))
                 .logout(form -> form
                         .logoutRequestMatcher(new AntPathRequestMatcher("/logout", "POST")).permitAll()
                         .invalidateHttpSession(true)
