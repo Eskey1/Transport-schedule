@@ -4,6 +4,7 @@ import com.example.Transport.schedule.Exceptions.InvalidTokenException;
 import com.example.Transport.schedule.Exceptions.UnkownIdentifierException;
 import com.example.Transport.schedule.Exceptions.UserAlreadyExistException;
 import com.example.Transport.schedule.models.ApplicationUser;
+import com.example.Transport.schedule.models.ApplicationUserRole;
 import com.example.Transport.schedule.models.UserData;
 import com.example.Transport.schedule.repository.UserRepository;
 
@@ -35,6 +36,7 @@ public class UserRegistrationService  implements UserService {
         ApplicationUser applicationUser = new ApplicationUser();
         BeanUtils.copyProperties(user, applicationUser);
         encodePassword(applicationUser, user);
+        applicationUser.setRole(ApplicationUserRole.USER);
         userRepository.save(applicationUser);
     }
 

@@ -94,37 +94,72 @@
 
     <section id="автобусы">
         <h2>Расписание автобусов</h2>
-        <form th:action="@{/getSchedule}" method="post">
-            <select name="stationCode">
-                <option th:each="station : ${stations}" th:value="${station.code}" th:text="${station.name}"></option>
-            </select>
-            <input type="submit" value="Получить расписание">
+
+        <form id="scheduleForm">
+            <label for="stationInput">Станция:</label>
+            <input type="text" id="stationInput" name="station" required>
+
+            <label for="transportTypeInput">Тип транспорта:</label>
+            <input type="text" id="transportTypeInput" name="transportType" required>
+
+            <button type="button" onclick="submitForm()">Отправить запрос</button>
         </form>
 
-        <table th:if="${schedule != null}" border="1">
-            <tr>
-                <th>Дата отправления</th>
-                <th>Направление</th>
-                <th>Время ближайшего отправления</th>
-            </tr>
-            <tr th:each="entry : ${schedule}">
-                <td th:text="${#dates.format(entry.departureDate, 'yyyy-MM-dd HH:mm')}"></td>
-                <td th:text="${entry.direction}"></td>
-                <td th:text="${entry.nextDepartureTime}"></td>
-            </tr>
-        </table>
-        <!-- Здесь размещается информация о расписании автобусов -->
+        <div id="result"></div>
+
+        <script>
+            function submitForm() {
+                var station = document.getElementById("stationInput").value;
+                var transportType = document.getElementById("transportTypeInput").value;
+
+                var xhr = new XMLHttpRequest();
+                xhr.open("POST", "/apiv1/getData", true);
+
+                // Получаем CSRF-токен из куки
+                var csrfToken = getCookie("XSRF-TOKEN");
+
+                // Устанавливаем токен в заголовок запроса
+                xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+                xhr.setRequestHeader("X-XSRF-TOKEN", csrfToken);
+
+                xhr.onreadystatechange = function () {
+                    if (xhr.readyState === 4) {
+                        if (xhr.status === 200) {
+                            var result = JSON.parse(xhr.responseText);
+                            document.getElementById("result").innerHTML = "Результат запроса: " + JSON.stringify(result);
+                        } else {
+                            console.error("Ошибка запроса: " + xhr.status);
+                        }
+                    }
+                };
+
+                var data = {
+                    "station": station,
+                    "transportType": transportType
+                };
+
+                xhr.send(JSON.stringify(data));
+            }
+
+            // Функция для получения значения куки по имени
+            function getCookie(name) {
+                var value = "; " + document.cookie;
+                var parts = value.split("; " + name + "=");
+                if (parts.length === 2) return parts.pop().split(";").shift();
+            }
+        </script>
+
     </section>
 
-    <section id="электрички">
-        <h2>Расписание электричек</h2>
-        <!-- Здесь размещается информация о расписании электричек -->
-    </section>
+    <!--    <section id="электрички">-->
+<!--        <h2>Расписание электричек</h2>-->
+<!--        &lt;!&ndash; Здесь размещается информация о расписании электричек &ndash;&gt;-->
+<!--    </section>-->
 
-    <section id="аэроэкспрессы">
-        <h2>Расписание аэроэкспрессов</h2>
-        <!-- Здесь размещается информация о расписании аэроэкспрессов -->
-    </section>
+<!--    <section id="аэроэкспрессы">-->
+<!--        <h2>Расписание аэроэкспрессов</h2>-->
+<!--        &lt;!&ndash; Здесь размещается информация о расписании аэроэкспрессов &ndash;&gt;-->
+<!--    </section>-->
 
     <footer>
         <p>&copy; 2023 Клоуны на колесах - Все права защищены Рональдом Макдональдом</p>

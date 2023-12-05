@@ -1,26 +1,27 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org">
-  <body>
-    <div class="container">
-      <div class="title">Please Log In</div>
-      <div class="content">
-        <form th:action="@{/auth/login}" method="post">
-          <div class="input-box">
-            <span class="details">Username</span>
-            <input type="text" name="username" placeholder="Enter your username" required/>
-          </div>
-          <div class="input-box">
-            <span class="details">Password</span>
-            <input type="password" name="password" placeholder="Enter your password" required/>
-          </div>
-          <div class="button">
-            <input type="submit" value="Log in">
-            <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
-          </div>
-        </form>
+<body>
+<div class="container">
+  <div class="title">Please Log In</div>
+  <div class="content">
+    <form th:action="@{/auth/login}" method="post">
+      <div class="input-box">
+        <span class="details">Username</span>
+        <input type="text" name="username" placeholder="Enter your username" required/>
       </div>
-    </div>
-  </body>
+      <div class="input-box">
+        <span class="details">Password</span>
+        <input type="password" name="password" placeholder="Enter your password" required/>
+      </div>
+      <div class="button">
+        <input type="submit" value="Log in">
+        <!-- Вставляем токен CSRF в форму -->
+        <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
+      </div>
+    </form>
+  </div>
+</div>
+</body>
 </html>
 <style>
     @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap');

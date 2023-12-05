@@ -4,7 +4,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.ProviderManager;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
@@ -30,22 +29,24 @@ public class SecurityConfig {
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http
                 .csrf((csrf) -> csrf
-                        .csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse()))
+                        .csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse())
+                )
                 .authorizeHttpRequests((authz) -> authz
-                        .requestMatchers("/Main", "/","/registration").permitAll()
+                        .requestMatchers("/auth","/registration", "/apiv1/**, /api/data").permitAll()
+
                         .anyRequest().authenticated()
                 )
 
                 .formLogin(form -> form
                         .loginPage("/auth/login").permitAll()
-//                        .defaultSuccessUrl("/auth/success", true))
                         .defaultSuccessUrl("/Main", true))
                 .logout(form -> form
                         .logoutRequestMatcher(new AntPathRequestMatcher("/logout", "POST")).permitAll()
-                        .logoutSuccessUrl("/Main")
+                        .logoutSuccessUrl("/login")
                         .invalidateHttpSession(true)
                         .clearAuthentication(true)
                         .deleteCookies("JSESSIONID", "XSRF-TOKEN"));
+
         return http.build();
     }
 
@@ -61,5 +62,7 @@ public class SecurityConfig {
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder(12);
     }
+
 }
+
 

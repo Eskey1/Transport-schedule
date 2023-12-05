@@ -71,13 +71,7 @@ public class MyController {
 
     @GetMapping("/Main")
     public String index(Model model) {
-        List<Station> stations = List.of(
-                new Station("Битца", "9875609"),
-                new Station("Саларьево", "9876347"),
-                new Station("Северные ворота", "9872014")
-        );
 
-        model.addAttribute("stations", stations);
         return "Main";
     }
 
