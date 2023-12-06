@@ -1,8 +1,7 @@
-package com.example.Transport.schedule.service;
+package com.example.Transport.schedule.Impl;
 
 
-import com.example.Transport.schedule.config.UserDetailsImpl;
-import com.example.Transport.schedule.models.ApplicationUser;
+import com.example.Transport.schedule.Impl.UserDetailsImpl;
 import com.example.Transport.schedule.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -23,9 +22,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
         );
     }
 
-//    public ApplicationUser registerUser(ApplicationUser user) {
-//        return repository.save(user);
-//    }
+
 
 }
 

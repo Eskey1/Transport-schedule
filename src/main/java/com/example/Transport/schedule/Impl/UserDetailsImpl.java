@@ -1,6 +1,7 @@
-package com.example.Transport.schedule.config;
+package com.example.Transport.schedule.Impl;
 
 import com.example.Transport.schedule.models.ApplicationUser;
+import com.example.Transport.schedule.repository.ValidPassword;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -14,6 +15,7 @@ import java.util.List;
 public class UserDetailsImpl implements UserDetails {
 
     private final String username;
+    @ValidPassword
     private final String password;
     private final List<SimpleGrantedAuthority> authorities;
     private final boolean isActive;

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -103,11 +103,13 @@
             <input type="text" id="transportTypeInput" name="transportType" required>
 
             <button type="button" onclick="submitForm()">Отправить запрос</button>
+<!--            <input type="hidden" id="csrfToken" th:value="${_csrf.token}" />-->
+<!--            <input type="hidden" id="csrfParameter" th:value="${_csrf.parameterName}" />-->
         </form>
 
         <div id="result"></div>
 
-        <script>
+        <script th:inline="javascript">
             function submitForm() {
                 var station = document.getElementById("stationInput").value;
                 var transportType = document.getElementById("transportTypeInput").value;
@@ -116,11 +118,13 @@
                 xhr.open("POST", "/apiv1/getData", true);
 
                 // Получаем CSRF-токен из куки
-                var csrfToken = getCookie("XSRF-TOKEN");
+                 var csrfToken =[[${_csrf.token}]];
+                // Получаем CSRF-параметр из модели
+                var csrfParameter = [[${_csrf.parameterName}]];
 
                 // Устанавливаем токен в заголовок запроса
                 xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
-                xhr.setRequestHeader("X-XSRF-TOKEN", csrfToken);
+                xhr.setRequestHeader(csrfParameter, csrfToken);
 
                 xhr.onreadystatechange = function () {
                     if (xhr.readyState === 4) {
@@ -148,6 +152,7 @@
                 if (parts.length === 2) return parts.pop().split(";").shift();
             }
         </script>
+
 
     </section>
 

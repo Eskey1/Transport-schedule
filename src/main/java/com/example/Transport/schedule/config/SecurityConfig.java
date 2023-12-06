@@ -32,7 +32,7 @@ public class SecurityConfig {
                         .csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse())
                 )
                 .authorizeHttpRequests((authz) -> authz
-                        .requestMatchers("/auth","/registration", "/apiv1/**, /api/data").permitAll()
+                        .requestMatchers("/auth","/registration", "/apiv1/**, /api/data, /apiv1/getData, /Main").permitAll()
 
                         .anyRequest().authenticated()
                 )
