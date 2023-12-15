@@ -1,5 +1,6 @@
 package com.example.Transport.schedule.TEST.Suburban;
 
+import com.example.Transport.schedule.TEST.DTO.ScheduleResponse;
 import com.example.Transport.schedule.TEST.Station_List.StationData;
 import com.example.Transport.schedule.TEST.Station_List.StationDataRepository;
 import com.fasterxml.jackson.databind.ObjectMapper;

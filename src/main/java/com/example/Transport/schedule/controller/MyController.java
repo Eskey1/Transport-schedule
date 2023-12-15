@@ -13,14 +13,14 @@ public class MyController {
 
 
     @GetMapping("/Main")
-    public String index(Model model) {
+    public String index() {
 
         return "Main";
     }
 
 
     @GetMapping("/")
-    public  String index(){
+    public  String index1(){
         return "redirect:/Main";
     }
 

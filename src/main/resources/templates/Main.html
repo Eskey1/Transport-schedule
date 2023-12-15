@@ -113,43 +113,26 @@
             function submitForm() {
                 var station = document.getElementById("stationInput").value;
                 var transportType = document.getElementById("transportTypeInput").value;
-
                 var xhr = new XMLHttpRequest();
                 xhr.open("POST", "/apiv1/getData", true);
-
-                // Получаем CSRF-токен из куки
-                 var csrfToken =[[${_csrf.token}]];
-                // Получаем CSRF-параметр из модели
-                var csrfParameter = [[${_csrf.parameterName}]];
-
+                var csrfToken = "${_csrf.token}";
+                var csrfParametr = "${_csrf.headerName}";
                 // Устанавливаем токен в заголовок запроса
-                xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
-                xhr.setRequestHeader(csrfParameter, csrfToken);
+                xhr.setRequestHeader("Content-Type", "application/json");
+                xhr.setRequestHeader("csrfParametr", "csrfToken");
 
-                xhr.onreadystatechange = function () {
-                    if (xhr.readyState === 4) {
+                xhr.onreadystatechange = function() {
+                    if (xhr.readyState === XMLHttpRequest.DONE) {
                         if (xhr.status === 200) {
-                            var result = JSON.parse(xhr.responseText);
-                            document.getElementById("result").innerHTML = "Результат запроса: " + JSON.stringify(result);
+                            document.getElementById("result").innerText = xhr.responseText;
                         } else {
-                            console.error("Ошибка запроса: " + xhr.status);
+                            console.log("Произошла ошибка при запросе");
                         }
                     }
-                };
+                }
 
-                var data = {
-                    "station": station,
-                    "transportType": transportType
-                };
-
-                xhr.send(JSON.stringify(data));
-            }
-
-            // Функция для получения значения куки по имени
-            function getCookie(name) {
-                var value = "; " + document.cookie;
-                var parts = value.split("; " + name + "=");
-                if (parts.length === 2) return parts.pop().split(";").shift();
+                var data = JSON.stringify({ "station": station, "transportType": transportType });
+                xhr.send(data);
             }
         </script>
 
