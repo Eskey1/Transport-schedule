@@ -1,7 +1,6 @@
-package com.example.Transport.schedule.Impl;
+package com.example.Transport.schedule.service;
 
 
-import com.example.Transport.schedule.Impl.UserDetailsImpl;
 import com.example.Transport.schedule.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.userdetails.UserDetails;

@@ -1,4 +1,4 @@
-package com.example.Transport.schedule.Impl;
+package com.example.Transport.schedule.service;
 
 import com.example.Transport.schedule.models.ApplicationUser;
 import com.example.Transport.schedule.repository.ValidPassword;
