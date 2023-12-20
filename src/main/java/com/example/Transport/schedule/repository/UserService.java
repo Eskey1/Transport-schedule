@@ -1,5 +1,6 @@
 package com.example.Transport.schedule.repository;
 
+import com.example.Transport.schedule.Exceptions.InvalidPasswordException;
 import com.example.Transport.schedule.Exceptions.InvalidTokenException;
 import com.example.Transport.schedule.Exceptions.UnkownIdentifierException;
 import com.example.Transport.schedule.Exceptions.UserAlreadyExistException;
@@ -9,7 +10,7 @@ import com.example.Transport.schedule.models.UserData;
 
 public interface UserService {
 
-    void register(final UserData user) throws UserAlreadyExistException;
+    void register(final UserData user) throws UserAlreadyExistException, InvalidPasswordException;
     boolean checkIfUserExist(final String email);
     void sendRegistrationConfirmationEmail(final ApplicationUser user);
     boolean verifyUser(final String token) throws InvalidTokenException;
